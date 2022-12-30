@@ -24,7 +24,8 @@ class MainActivity : AppCompatActivity() ,OnMapReadyCallback{
             for (result in grantResults)
                 if (result != PackageManager.PERMISSION_GRANTED)
                     finish()
-            loadMap()
+            val map = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+            map.getMapAsync(this)
         }
     }
 
@@ -32,6 +33,8 @@ class MainActivity : AppCompatActivity() ,OnMapReadyCallback{
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val map = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        map.getMapAsync(this)
     }
 
     override fun onMapReady(map: GoogleMap) {
